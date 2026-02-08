@@ -207,11 +207,11 @@
       });
     }
   }
-})({"dgDdZ":[function(require,module,exports,__globalThis) {
+})({"elbaT":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 59030;
+var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -715,9 +715,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"gNc1f":[function(require,module,exports,__globalThis) {
 const testElement = document.createElement("h2");
-testElement.textContent = "hello";
-document.body.appendChild(testElement);
 
-},{}]},["dgDdZ","gNc1f"], "gNc1f", "parcelRequire1861", {})
+},{}]},["elbaT","gNc1f"], "gNc1f", "parcelRequire1861", {})
 
 //# sourceMappingURL=rest-countries-api-with-color-theme-switcher-master.0f289648.js.map
