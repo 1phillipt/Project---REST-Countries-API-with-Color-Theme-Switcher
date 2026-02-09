@@ -3,8 +3,11 @@ import type { Country } from "./models/Countries.js";
 
 const renderCountries = async (Countries: Country[]) => {
 
+
   const countriesContainer = document.getElementById("countries-container");
   if (!countriesContainer) return;
+
+  countriesContainer.innerHTML = "";
 
 //   now this will loop into each country
   Countries.forEach((country) => {
@@ -27,10 +30,10 @@ const renderCountries = async (Countries: Country[]) => {
    name.textContent = country.name.common;
    
    const population = document.createElement("p");
-   population.innerHTML = country.population?.toLocaleString() || "N/A";
+   population.textContent = country.population?.toLocaleString() || "N/A";
 
    const region = document.createElement("p");
-   region.innerHTML = country.region || "N/A";
+   region.textContent = country.region || "N/A";
 
    const capital = document.createElement("p");
    capital.textContent = country.capital || "N/A";
@@ -50,12 +53,7 @@ const renderCountries = async (Countries: Country[]) => {
 
 let countries: Country[] = [];
 
-async function init() {
-    countries = await fetchCountries();
-    renderCountries(countries);
-    darkModeToggle();
-    
-}
+
 
 
 //changes color theme
@@ -77,7 +75,7 @@ return countries.filter(country => country.name.common.toLowerCase().includes(se
 
 //this funtion return the countries using filter region
 
-function fileterByRegion(filter:string):Country[]{
+function filterByRegion(filter:string):Country[]{
 return countries.filter(country => country.region === filter);
 }
     
@@ -85,6 +83,28 @@ return countries.filter(country => country.region === filter);
 function setUpSearch(){
     const searchInput = document.getElementById("search-input") as HTMLInputElement;
     const filterInput = document.getElementById("region-filter") as HTMLSelectElement;
+
+      if (!searchInput || !filterInput) return;
+
+    searchInput.addEventListener("input", () => {
+        const search = searchInput.value.trim();
+        const filtered = searchCountries(search);
+        renderCountries(filtered);
+    });
+
+    filterInput.addEventListener("change", () => {
+        const filter = filterInput.value;
+        const filtered = filterByRegion(filter);
+        renderCountries(filtered);
+    });
 }
 
+
+async function init() {
+    countries = await fetchCountries();
+    renderCountries(countries);
+    darkModeToggle();
+    setUpSearch();
+    
+}
 init();

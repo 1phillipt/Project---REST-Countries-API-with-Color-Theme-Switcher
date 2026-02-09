@@ -718,6 +718,7 @@ var _countriesJs = require("./models/Countries.js");
 const renderCountries = async (Countries)=>{
     const countriesContainer = document.getElementById("countries-container");
     if (!countriesContainer) return;
+    countriesContainer.innerHTML = "";
     //   now this will loop into each country
     Countries.forEach((country)=>{
         //creates card dev
@@ -734,9 +735,9 @@ const renderCountries = async (Countries)=>{
         const name = document.createElement("h2");
         name.textContent = country.name.common;
         const population = document.createElement("p");
-        population.innerHTML = country.population?.toLocaleString() || "N/A";
+        population.textContent = country.population?.toLocaleString() || "N/A";
         const region = document.createElement("p");
-        region.innerHTML = country.region || "N/A";
+        region.textContent = country.region || "N/A";
         const capital = document.createElement("p");
         capital.textContent = country.capital || "N/A";
         //add elements to the info div
@@ -750,12 +751,7 @@ const renderCountries = async (Countries)=>{
         countriesContainer.appendChild(card);
     });
 };
-async function init() {
-    const countries = await (0, _countriesJs.fetchCountries)();
-    renderCountries(countries);
-    darkModeToggle();
-}
-init();
+let countries = [];
 //changes color theme
 function darkModeToggle() {
     const darkModeToggle = document.getElementById("dark-mode-toggle");
@@ -764,15 +760,36 @@ function darkModeToggle() {
         document.body.classList.toggle("dark-mode");
     });
 }
-//return country from promise fuction that takes Country as input
-async function filterCountries(country) {
-    const countries = await (0, _countriesJs.fetchCountries)();
-    return countries.filter((c)=>c.name.common.toLowerCase().includes(country.toLowerCase()));
+//return country that takes Country as input
+function searchCountries(search) {
+    return countries.filter((country)=>country.name.common.toLowerCase().includes(search.toLowerCase()));
 }
-async function searchCountries(country) {
-    const countries = await (0, _countriesJs.fetchCountries)();
-    return countries.filter((c)=>c.name.common.toLowerCase().includes(country.toLowerCase()));
+//this funtion return the countries using filter region
+function filterByRegion(filter) {
+    return countries.filter((country)=>country.region === filter);
 }
+function setUpSearch() {
+    const searchInput = document.getElementById("search-input");
+    const filterInput = document.getElementById("region-filter");
+    if (!searchInput || !filterInput) return;
+    searchInput.addEventListener("input", ()=>{
+        const search = searchInput.value.trim();
+        const filtered = searchCountries(search);
+        renderCountries(filtered);
+    });
+    filterInput.addEventListener("change", ()=>{
+        const filter = filterInput.value;
+        const filtered = filterByRegion(filter);
+        renderCountries(filtered);
+    });
+}
+async function init() {
+    countries = await (0, _countriesJs.fetchCountries)();
+    renderCountries(countries);
+    darkModeToggle();
+    setUpSearch();
+}
+init();
 
 },{"./models/Countries.js":"dm1Hg"}],"dm1Hg":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
