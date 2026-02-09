@@ -1,1 +1,1 @@
-{"mappings":"","sources":[],"sourcesContent":[],"names":[],"version":3,"file":"rest-countries-api-with-color-theme-switcher-master.4d663569.css.map","sourceRoot":"/__parcel_source_root/"}
+{"mappings":"AAAA","sources":["src/styles.css"],"sourcesContent":["body.dark-mode {\r\n  background-color: #1a1a1a;\r\n  color: white;\r\n}"],"names":[],"version":3,"file":"rest-countries-api-with-color-theme-switcher-master.4d663569.css.map","sourceRoot":"/__parcel_source_root/"}

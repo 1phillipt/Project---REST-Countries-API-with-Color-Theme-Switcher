@@ -753,8 +753,26 @@ const renderCountries = async (Countries)=>{
 async function init() {
     const countries = await (0, _countriesJs.fetchCountries)();
     renderCountries(countries);
+    darkModeToggle();
 }
 init();
+//changes color theme
+function darkModeToggle() {
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+    if (!darkModeToggle) return;
+    darkModeToggle.addEventListener("click", ()=>{
+        document.body.classList.toggle("dark-mode");
+    });
+}
+//return country from promise fuction that takes Country as input
+async function filterCountries(country) {
+    const countries = await (0, _countriesJs.fetchCountries)();
+    return countries.filter((c)=>c.name.common.toLowerCase().includes(country.toLowerCase()));
+}
+async function searchCountries(country) {
+    const countries = await (0, _countriesJs.fetchCountries)();
+    return countries.filter((c)=>c.name.common.toLowerCase().includes(country.toLowerCase()));
+}
 
 },{"./models/Countries.js":"dm1Hg"}],"dm1Hg":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
