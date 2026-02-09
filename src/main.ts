@@ -81,6 +81,7 @@ return countries.filter(country => country.region === filter);
     
 
 function setUpSearch(){
+    
     const searchInput = document.getElementById("search-input") as HTMLInputElement;
     const filterInput = document.getElementById("region-filter") as HTMLSelectElement;
 
