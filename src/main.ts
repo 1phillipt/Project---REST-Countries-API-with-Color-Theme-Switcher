@@ -47,8 +47,10 @@ const renderCountries = async (Countries: Country[]) => {
   });
 }
 
+const countries: Country[] = [];
+
 async function init() {
-    const countries = await fetchCountries();
+     countries = await fetchCountries();
     renderCountries(countries);
     darkModeToggle();
 }
@@ -66,12 +68,6 @@ function darkModeToggle(){
 }
 //return country from promise fuction that takes Country as input
 
-async function filterCountries(country:string):Promise<Country[]>{
-    const countries = await fetchCountries();
-    return countries.filter(c => c.name.common.toLowerCase().includes(country.toLowerCase()));
-
-}
-async function searchCountries(country: string): Promise<Country[]> {
-    const countries = await fetchCountries();
-    return countries.filter(c => c.name.common.toLowerCase().includes(country.toLowerCase()));
+ function filterAndSearchCountries(search:string, region:string){
+  let filterd = countries;
 }
