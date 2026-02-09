@@ -2,8 +2,8 @@ import { fetchCountries } from "./models/Countries.js";
 import type { Country } from "./models/Countries.js";
 
 const renderCountries = async (Countries: Country[]) => {
-  const container = document.getElementById("countries-container");
-  if (!container) return;
+  const countriesContainer = document.getElementById("countries-container");
+  if (!countriesContainer) return;
 
 //   now this will loop into each country
   Countries.forEach((country) => {
@@ -34,9 +34,16 @@ const renderCountries = async (Countries: Country[]) => {
    const capital = document.createElement("p");
    capital.textContent = country.capital || "N/A";
 
+//add elements to the info div
+   info.appendChild(name);
+   info.appendChild(population);
+   info.appendChild(region);
+   info.appendChild(capital);
 
-
-
+   //add flag and info dev to the countriesContainer
+   card.appendChild(flag);
+   card.appendChild(info);
+   countriesContainer.appendChild(card);
   });
 }
 
