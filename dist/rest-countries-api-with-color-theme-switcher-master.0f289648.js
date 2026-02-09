@@ -714,7 +714,6 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"gNc1f":[function(require,module,exports,__globalThis) {
-const testElement = document.createElement("h2");
 
 },{}]},["elbaT","gNc1f"], "gNc1f", "parcelRequire1861", {})
 
