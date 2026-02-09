@@ -47,3 +47,9 @@ const renderCountries = async (Countries: Country[]) => {
   });
 }
 
+async function init() {
+    const countries = await fetchCountries();
+    renderCountries(countries);
+}
+
+init();

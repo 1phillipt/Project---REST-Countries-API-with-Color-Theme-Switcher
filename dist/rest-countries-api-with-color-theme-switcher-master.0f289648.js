@@ -714,6 +714,88 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"gNc1f":[function(require,module,exports,__globalThis) {
+var _countriesJs = require("./models/Countries.js");
+const renderCountries = async (Countries)=>{
+    const countriesContainer = document.getElementById("countries-container");
+    if (!countriesContainer) return;
+    //   now this will loop into each country
+    Countries.forEach((country)=>{
+        //creates card dev
+        const card = document.createElement("div");
+        card.className = "country-card";
+        //creates and sets flag element
+        const flag = document.createElement("img");
+        flag.src = country.flags.png;
+        flag.alt = country.flags.alt;
+        //creates info dev
+        const info = document.createElement("div");
+        info.className = "country-info";
+        //creates country name and sets it to the country's common name
+        const name = document.createElement("h2");
+        name.textContent = country.name.common;
+        const population = document.createElement("p");
+        population.innerHTML = country.population?.toLocaleString() || "N/A";
+        const region = document.createElement("p");
+        region.innerHTML = country.region || "N/A";
+        const capital = document.createElement("p");
+        capital.textContent = country.capital || "N/A";
+        //add elements to the info div
+        info.appendChild(name);
+        info.appendChild(population);
+        info.appendChild(region);
+        info.appendChild(capital);
+        //add flag and info dev to the countriesContainer
+        card.appendChild(flag);
+        card.appendChild(info);
+        countriesContainer.appendChild(card);
+    });
+};
+async function init() {
+    const countries = await (0, _countriesJs.fetchCountries)();
+    renderCountries(countries);
+}
+init();
+
+},{"./models/Countries.js":"dm1Hg"}],"dm1Hg":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fetchCountries", ()=>fetchCountries);
+const api = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3";
+async function fetchCountries() {
+    const response = await fetch(api);
+    const countries = await response.json();
+    return countries;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["elbaT","gNc1f"], "gNc1f", "parcelRequire1861", {})
 
