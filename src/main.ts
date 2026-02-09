@@ -2,6 +2,7 @@ import { fetchCountries } from "./models/Countries.js";
 import type { Country } from "./models/Countries.js";
 
 const renderCountries = async (Countries: Country[]) => {
+
   const countriesContainer = document.getElementById("countries-container");
   if (!countriesContainer) return;
 
@@ -47,15 +48,15 @@ const renderCountries = async (Countries: Country[]) => {
   });
 }
 
-const countries: Country[] = [];
+let countries: Country[] = [];
 
 async function init() {
-     countries = await fetchCountries();
+    countries = await fetchCountries();
     renderCountries(countries);
     darkModeToggle();
+    
 }
 
-init();
 
 //changes color theme
 function darkModeToggle(){
@@ -66,8 +67,24 @@ function darkModeToggle(){
         document.body.classList.toggle("dark-mode");
     });
 }
-//return country from promise fuction that takes Country as input
 
- function filterAndSearchCountries(search:string, region:string){
-  let filterd = countries;
+//return country that takes Country as input
+
+function searchCountries(search:string): Country[]{
+
+return countries.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()));
 }
+
+//this funtion return the countries using filter region
+
+function fileterByRegion(filter:string):Country[]{
+return countries.filter(country => country.region === filter);
+}
+    
+
+function setUpSearch(){
+    const searchInput = document.getElementById("search-input") as HTMLInputElement;
+    const filterInput = document.getElementById("region-filter") as HTMLSelectElement;
+}
+
+init();
