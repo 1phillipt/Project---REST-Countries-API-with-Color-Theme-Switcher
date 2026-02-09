@@ -8,14 +8,13 @@
 </head>
 <body id="countries">
     <div class="container">
-        
         <header>
-            <h1></h1>Where in the world?</h1>
-            <button>Dark Mode</button>
+            <h1>Where in the world?</h1>
+            <button id="dark-mode-toggle">Dark Mode</button>
         </header>
         <div class="search-control">
-            <input type="text" placeholder="Search for a country...">
-            <select>
+            <input id="search-input" type="text" placeholder="Search for a country...">
+            <select id="region-filter">
                 <option value="">Filter by Region</option>
                 <option value="Africa">Africa</option>
                 <option value="Americas">Americas</option>
@@ -25,9 +24,8 @@
             </select>
 
         </div>
-        
         <div id="countries-container">
-
+        <!-- this will be populated with ts code" -->
         </div>
     </div>
 
